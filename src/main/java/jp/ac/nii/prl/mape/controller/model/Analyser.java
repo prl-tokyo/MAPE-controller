@@ -15,23 +15,31 @@ public class Analyser {
 	private Long id;
 	
 	private String baseUrl;
-	
+
 	private String analysisUrl;
 
+	public String getAnalysisUrl() {
+		return analysisUrl;
+	}
+	
 	public String getBaseUrl() {
 		return baseUrl;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setAnalysisUrl(String analysisUrl) {
+		this.analysisUrl = analysisUrl;
 	}
 
 	public void setBaseUrl(String baseUrl) {
 		this.baseUrl = baseUrl;
 	}
 
-	public String getAnalysisUrl() {
-		return analysisUrl;
-	}
-
-	public void setAnalysisUrl(String analysisUrl) {
-		this.analysisUrl = analysisUrl;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
