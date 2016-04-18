@@ -1,5 +1,8 @@
 package jp.ac.nii.prl.mape.controller.service;
 
+import org.springframework.stereotype.Service;
+
+@Service("plannerService")
 public class PlannerServiceImpl implements PlannerService {
 
 	/* (non-Javadoc)

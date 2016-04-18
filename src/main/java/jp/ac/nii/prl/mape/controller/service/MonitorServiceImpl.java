@@ -1,5 +1,8 @@
 package jp.ac.nii.prl.mape.controller.service;
 
+import org.springframework.stereotype.Service;
+
+@Service("monitorService")
 public class MonitorServiceImpl implements MonitorService {
 
 	/* (non-Javadoc)

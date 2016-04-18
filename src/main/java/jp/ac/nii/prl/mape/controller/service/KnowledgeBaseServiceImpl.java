@@ -1,5 +1,8 @@
 package jp.ac.nii.prl.mape.controller.service;
 
+import org.springframework.stereotype.Service;
+
+@Service("knowledgeBaseService")
 public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
 
 	/* (non-Javadoc)
