@@ -5,6 +5,8 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,12 +20,17 @@ public class AP {
 	
 	private String name;
 
+	@JsonIgnore
+	@OneToMany
 	private Collection<AP> predecessors;
 
+	@OneToOne
 	private Analyser analyser;
 	
+	@OneToOne
 	private Planner planner;
 	
+	@OneToOne
 	private CombinedAP combinedAP;
 	
 	public Analyser getAnalyser() {
