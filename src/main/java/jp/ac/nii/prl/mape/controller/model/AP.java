@@ -81,4 +81,8 @@ public class AP {
 		this.predecessors = predecessors;
 	}
 
+	public boolean hasCombinedAP() {
+		return combinedAP != null;
+	}
+
 }
