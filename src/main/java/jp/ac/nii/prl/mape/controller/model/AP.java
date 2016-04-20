@@ -1,11 +1,12 @@
 package jp.ac.nii.prl.mape.controller.model;
 
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,9 +21,8 @@ public class AP {
 	
 	private String name;
 
-	@JsonIgnore
-	@OneToMany
-	private Collection<AP> predecessors;
+	@ElementCollection
+	private List<String> predecessors;
 
 	@OneToOne
 	private Analyser analyser;
@@ -53,7 +53,7 @@ public class AP {
 		return planner;
 	}
 
-	public Collection<AP> getPredecessors() {
+	public Collection<String> getPredecessors() {
 		return predecessors;
 	}
 
@@ -77,7 +77,7 @@ public class AP {
 		this.planner = planner;
 	}
 
-	public void setPredecessors(Collection<AP> predecessors) {
+	public void setPredecessors(List<String> predecessors) {
 		this.predecessors = predecessors;
 	}
 
