@@ -1,12 +1,8 @@
 package jp.ac.nii.prl.mape.controller.configuration;
 
-import java.util.List;
-
 public class APProperties {
 	
 	private String name;
-	
-	private List<String> predecessors;
 	
 	private ComponentProperty analyser = null;
 	
@@ -30,10 +26,6 @@ public class APProperties {
 		return planner;
 	}
 
-	public List<String> getPredecessors() {
-		return predecessors;
-	}
-
 	public void setAnalyser(ComponentProperty analyser) {
 		this.analyser = analyser;
 	}
@@ -48,9 +40,5 @@ public class APProperties {
 
 	public void setPlanner(ComponentProperty planner) {
 		this.planner = planner;
-	}
-
-	public void setPredecessors(List<String> predecessors) {
-		this.predecessors = predecessors;
 	}
 }
