@@ -3,6 +3,7 @@ package jp.ac.nii.prl.mape.controller.service;
 import org.springframework.stereotype.Service;
 
 import jp.ac.nii.prl.mape.controller.model.MAPEKComponent;
+import jp.ac.nii.prl.mape.controller.model.Timing;
 
 @Service("monitorService")
 public class MonitorServiceImpl implements MonitorService {
@@ -16,7 +17,7 @@ public class MonitorServiceImpl implements MonitorService {
 	}
 
 	@Override
-	public void monitor(MAPEKComponent monitor, MAPEKComponent kb) {
+	public void monitor(MAPEKComponent monitor, MAPEKComponent kb, Timing timing) {
 		// TODO Auto-generated method stub
 		
 	}
