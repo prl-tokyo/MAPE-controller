@@ -8,7 +8,7 @@ import jp.ac.nii.prl.mape.controller.model.Timing;
 import jp.ac.nii.prl.mape.controller.repository.TimingRepository;
 
 @Service("timingService")
-public class TimingServiceImpl {
+public class TimingServiceImpl implements TimingService {
 	
 	private final TimingRepository timingRepository;
 	
@@ -16,10 +16,18 @@ public class TimingServiceImpl {
 		this.timingRepository = timingRepository;
 	}
 	
+	/* (non-Javadoc)
+	 * @see jp.ac.nii.prl.mape.controller.service.TimingService#save(jp.ac.nii.prl.mape.controller.model.Timing)
+	 */
+	@Override
 	public void save(Timing timing) {
 		timingRepository.save(timing);
 	}
 	
+	/* (non-Javadoc)
+	 * @see jp.ac.nii.prl.mape.controller.service.TimingService#findAll()
+	 */
+	@Override
 	public List<Timing> findAll() {
 		return timingRepository.findAll();
 	}
