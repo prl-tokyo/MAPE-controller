@@ -1,11 +1,11 @@
 package jp.ac.nii.prl.mape.controller.service;
 
-import jp.ac.nii.prl.mape.controller.model.KnowledgeBase;
+import jp.ac.nii.prl.mape.controller.model.MAPEKComponent;
 
 public interface KnowledgeBaseService {
 
-	void put(KnowledgeBase kb, String bx, String view);
+	void put(MAPEKComponent kb, String bx, String view);
 
-	String get(KnowledgeBase kb, String bx);
+	String get(MAPEKComponent kb, String bx);
 
 }

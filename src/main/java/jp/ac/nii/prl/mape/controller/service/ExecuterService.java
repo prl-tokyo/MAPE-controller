@@ -1,10 +1,9 @@
 package jp.ac.nii.prl.mape.controller.service;
 
-import jp.ac.nii.prl.mape.controller.model.Executer;
-import jp.ac.nii.prl.mape.controller.model.KnowledgeBase;
+import jp.ac.nii.prl.mape.controller.model.MAPEKComponent;
 
 public interface ExecuterService {
 
-	void execute(Executer executer, KnowledgeBase kb);
+	void execute(MAPEKComponent executer, MAPEKComponent kb);
 
 }

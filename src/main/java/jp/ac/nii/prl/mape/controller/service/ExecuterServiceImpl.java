@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import jp.ac.nii.prl.mape.controller.model.Executer;
-import jp.ac.nii.prl.mape.controller.model.KnowledgeBase;
+import jp.ac.nii.prl.mape.controller.model.MAPEKComponent;
 
 @Service("executerService")
 public class ExecuterServiceImpl implements ExecuterService {
@@ -21,9 +20,9 @@ public class ExecuterServiceImpl implements ExecuterService {
 	 * @see jp.ac.nii.prl.mape.controller.service.ExecuterService#execute()
 	 */
 	@Override
-	public void execute(Executer executer, KnowledgeBase kb) {
+	public void execute(MAPEKComponent executer, MAPEKComponent kb) {
 		RestTemplate template = new RestTemplate();
 		String view = kbService.get(kb, "execution");
-		template.postForLocation(executer.getExecutionUrl(), view);
+		template.postForLocation(executer.getUrl(), view);
 	}
 }

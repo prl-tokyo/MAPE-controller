@@ -18,36 +18,43 @@ public class MAPE {
 	@JsonIgnore
 	private Long id;
 	
-	@OneToMany
-	private List<AP> aps;
+	@OneToOne
+	private MAPEKComponent monitor;
 	
-	@OneToOne
-	private Executer executer;
+	@OneToMany
+	private List<APConcern> aps;
 
 	@OneToOne
-	private KnowledgeBase kb;
+	private MAPEKComponent executer;
 
-	public List<AP> getAps() {
+	@OneToOne
+	private MAPEKComponent kb;
+	
+	public List<APConcern> getAps() {
 		return aps;
 	}
-	
-	public Executer getExecuter() {
+
+	public MAPEKComponent getExecuter() {
 		return executer;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
 	
-	public KnowledgeBase getKb() {
+	public MAPEKComponent getKb() {
 		return kb;
 	}
 	
-	public void setAps(List<AP> aps) {
+	public MAPEKComponent getMonitor() {
+		return monitor;
+	}
+	
+	public void setAps(List<APConcern> aps) {
 		this.aps = aps;
 	}
 	
-	public void setExecuter(Executer executer) {
+	public void setExecuter(MAPEKComponent executer) {
 		this.executer = executer;
 	}
 	
@@ -55,7 +62,11 @@ public class MAPE {
 		this.id = id;
 	}
 	
-	public void setKb(KnowledgeBase kb) {
+	public void setKb(MAPEKComponent kb) {
 		this.kb = kb;
+	}
+	
+	public void setMonitor(MAPEKComponent monitor) {
+		this.monitor = monitor;
 	}
 }
