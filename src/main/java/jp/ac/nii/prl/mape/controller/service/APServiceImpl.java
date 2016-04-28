@@ -26,6 +26,7 @@ public class APServiceImpl implements APService {
 	 */
 	@Override
 	public void analyseAndPlan(APConcern ap, MAPEKComponent kb, Timing timing) {
+		System.out.println("AP for concern " + ap.getName());
 		Timing apTiming = new Timing();
 		apTiming.setName(ap.getName() + "AP");
 		apTiming.setStart(new Date());
