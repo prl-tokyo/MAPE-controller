@@ -25,7 +25,7 @@ public class MonitorServiceImpl implements MonitorService {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		// get the source from the monitor
-		String source = restTemplate.getForObject(monitor.getUrl() + "/monitor", String.class);
+		String source = restTemplate.getForObject(monitor.getUrl(), String.class);
 		
 		System.out.println("Source fetched from monitor");
 		
