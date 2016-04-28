@@ -1,5 +1,6 @@
 package jp.ac.nii.prl.mape.controller.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class MAPE {
 	private MAPEKComponent monitor;
 	
 	@OneToMany
-	private List<APConcern> aps;
+	private List<APConcern> aps = new ArrayList<>();
 
 	@OneToOne
 	private MAPEKComponent executer;
@@ -68,5 +69,9 @@ public class MAPE {
 	
 	public void setMonitor(MAPEKComponent monitor) {
 		this.monitor = monitor;
+	}
+
+	public void addAP(APConcern apConcern) {
+		aps.add(apConcern);
 	}
 }
