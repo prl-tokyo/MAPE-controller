@@ -38,11 +38,11 @@ public class MAPEKComponent {
 
 	/**
 	 * Returns a String representation of the URL used to call the service, in the form
-	 * baseUrl/endPoint/parameter
+	 * baseUrl/endPoint
 	 * @return
 	 */
 	public String getUrl() {
-		return baseUrl + "/" + endpoint + "/" + parameter;
+		return baseUrl + "/" + endpoint;
 	}
 
 	public void setBaseUrl(String baseUrl) {
