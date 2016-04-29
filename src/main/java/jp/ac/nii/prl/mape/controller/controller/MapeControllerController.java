@@ -120,17 +120,19 @@ public class MapeControllerController {
 		mape.setMonitor(monitor);
 		
 		APConcern autoScaling = new APConcern();
-		autoScaling.setName("autoscaling");
+		autoScaling.setName("autoScaling");
 		
 		MAPEKComponent asAnalyser = new MAPEKComponent();
 		asAnalyser.setBaseUrl("http://localhost:8082");
 		asAnalyser.setEndpoint("/deployment");
+		asAnalyser.setParameter("sg-77d40013");
 		
 		autoScaling.setAnalyser(asAnalyser);
 		
 		MAPEKComponent asPlanner = new MAPEKComponent();
-		asPlanner.setBaseUrl("http://localhost:8083");
+		asPlanner.setBaseUrl("http://localhost:8090");
 		asPlanner.setEndpoint("/deployment");
+		asPlanner.setParameter("sg-77d40013");
 		
 		autoScaling.setPlanner(asPlanner);;
 		
@@ -140,12 +142,23 @@ public class MapeControllerController {
 		redundancy.setName("redundancy");
 		
 		MAPEKComponent redAP = new MAPEKComponent();
-		redAP.setBaseUrl("http://localhost:8084");
-		redAP.setEndpoint("/deployment");
+		redAP.setBaseUrl("http://localhost:8099");
+		redAP.setEndpoint("/redundancy");
 		
 		redundancy.setCombined(redAP);
 		
 		mape.addAP(redundancy);
+		
+		APConcern firewall = new APConcern();
+		firewall.setName("firewall");
+		
+		MAPEKComponent firewallService = new MAPEKComponent();
+		firewallService.setBaseUrl("http://localhost:8084");
+		firewallService.setEndpoint("/firewall");
+		
+		firewall.setCombined(firewallService);
+		
+		mape.addAP(firewall);
 		
 		MAPEKComponent executer = new MAPEKComponent();
 		executer.setBaseUrl("http://localhost:8087");

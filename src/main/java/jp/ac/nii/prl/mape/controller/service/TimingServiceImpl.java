@@ -23,6 +23,8 @@ public class TimingServiceImpl implements TimingService {
 	 */
 	@Override
 	public void save(Timing timing) {
+		for (Timing child:timing.getChildren())
+			save(child);
 		timingRepository.save(timing);
 	}
 	

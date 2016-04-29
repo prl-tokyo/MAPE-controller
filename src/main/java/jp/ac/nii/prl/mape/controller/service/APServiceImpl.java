@@ -4,6 +4,9 @@ import java.net.URI;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,7 +50,7 @@ public class APServiceImpl implements APService {
 		getTiming.setName(bx + " analysis GET");
 		getTiming.setStart(new Date());
 		
-		String view = kbService.get(kb, bx);
+		String view = kbService.get(kb, bx, analyser.getParameter());
 		
 		getTiming.setEnd(new Date());
 		timing.addchild(getTiming);
@@ -57,7 +60,12 @@ public class APServiceImpl implements APService {
 		aTiming.setStart(new Date());
 		
 		RestTemplate template = new RestTemplate();
-		URI location = template.postForLocation(analyser.getUrl(), view);
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        HttpEntity<String> entity = new HttpEntity<String>(view, headers);
+		System.out.println(analyser.getUrl());
+		System.out.println(view);
+		URI location = template.postForLocation(analyser.getUrl(), entity);
 		view = template.getForObject(location, String.class);
 		
 		aTiming.setEnd(new Date());
@@ -76,7 +84,10 @@ public class APServiceImpl implements APService {
 		pTiming.setStart(new Date());
 		
 		RestTemplate template = new RestTemplate();
-		URI location = template.postForLocation(planner.getUrl(), view);
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        HttpEntity<String> entity = new HttpEntity<String>(view, headers);
+		URI location = template.postForLocation(planner.getUrl(), entity);
 		view = template.getForObject(location, String.class);
 		
 		pTiming.setEnd(new Date());
@@ -86,7 +97,7 @@ public class APServiceImpl implements APService {
 		putTiming.setName(bx + " planning PUT");
 		putTiming.setStart(new Date());
 		
-		kbService.put(kb, bx, view);
+		kbService.put(kb, bx, view, planner.getParameter());
 		
 		putTiming.setEnd(new Date());
 		timing.addchild(putTiming);
@@ -97,7 +108,7 @@ public class APServiceImpl implements APService {
 		getTiming.setName(bx + "combined GET");
 		getTiming.setStart(new Date());
 		
-		String view = kbService.get(kb, bx);
+		String view = kbService.get(kb, bx, combined.getParameter());
 		
 		getTiming.setEnd(new Date());
 		timing.addchild(getTiming);
@@ -107,7 +118,11 @@ public class APServiceImpl implements APService {
 		combTiming.setStart(new Date());
 		
 		RestTemplate template = new RestTemplate();
-		URI location = template.postForLocation(combined.getUrl(), view);
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        HttpEntity<String> entity = new HttpEntity<String>(view, headers);
+        System.out.println(combined.getUrl());
+		URI location = template.postForLocation(combined.getUrl(), entity);
 		view = template.getForObject(location, String.class);
 		
 		combTiming.setEnd(new Date());
@@ -117,7 +132,7 @@ public class APServiceImpl implements APService {
 		putTiming.setName(bx + "combined PUT");
 		putTiming.setStart(new Date());
 		
-		kbService.put(kb, bx, view);
+		kbService.put(kb, bx, view, combined.getParameter());
 		
 		putTiming.setEnd(new Date());
 		timing.addchild(putTiming);

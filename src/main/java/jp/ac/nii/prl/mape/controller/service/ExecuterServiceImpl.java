@@ -3,6 +3,9 @@ package jp.ac.nii.prl.mape.controller.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,7 +32,7 @@ public class ExecuterServiceImpl implements ExecuterService {
 		getTiming.setStart(new Date());
 		
 		RestTemplate template = new RestTemplate();
-		String view = kbService.get(kb, "execution");
+		String view = kbService.get(kb, "execution", "");
 		
 		getTiming.setEnd(new Date());
 		timing.addchild(getTiming);
@@ -38,9 +41,16 @@ public class ExecuterServiceImpl implements ExecuterService {
 		executionTiming.setName("Executer");
 		executionTiming.setStart(new Date());
 		
-		template.postForLocation(executer.getUrl(), view);
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        HttpEntity<String> entity = new HttpEntity<String>(view, headers);
+        System.out.println("Execute: " + view);
+		template.postForLocation(executer.getUrl(), entity);
 		
 		executionTiming.setEnd(new Date());
+
+		System.out.println("Execution completed");
+		
 		timing.addchild(executionTiming);
 	}
 }
