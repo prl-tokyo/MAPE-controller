@@ -1,7 +1,6 @@
 package jp.ac.nii.prl.mape.controller.controller;
 
 import java.net.URI;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import jp.ac.nii.prl.mape.controller.configuration.APProperties;
 import jp.ac.nii.prl.mape.controller.configuration.ControllerConfigurationProperties;
 import jp.ac.nii.prl.mape.controller.model.APConcern;
 import jp.ac.nii.prl.mape.controller.model.MAPE;
@@ -59,14 +57,6 @@ public class MapeControllerController {
 		// create response
 		HttpHeaders httpHeaders = new HttpHeaders();
 		return new ResponseEntity<>(null, httpHeaders, HttpStatus.OK);
-	}
-
-	@RequestMapping(value="/monitor", method=RequestMethod.GET)
-	public ResponseEntity<?> monitor(@RequestBody String monitor) {
-		
-		// create response
-		HttpHeaders httpHeaders = new HttpHeaders();
-		return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="/ape", method=RequestMethod.POST)
