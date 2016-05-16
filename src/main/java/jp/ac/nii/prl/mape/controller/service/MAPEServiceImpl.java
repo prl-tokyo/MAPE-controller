@@ -5,7 +5,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.ac.nii.prl.mape.controller.configuration.ControllerConfigurationProperties;
 import jp.ac.nii.prl.mape.controller.model.APConcern;
 import jp.ac.nii.prl.mape.controller.model.MAPE;
 import jp.ac.nii.prl.mape.controller.model.Timing;
@@ -17,9 +16,6 @@ public class MAPEServiceImpl implements MAPEService {
 	private final ExecuterService executerService;
 	private final APService apService;
 	private final TimingService timingService;
-	
-	@Autowired
-	private ControllerConfigurationProperties properties;
 	
 	@Autowired
 	public MAPEServiceImpl(MonitorService monitorService,
