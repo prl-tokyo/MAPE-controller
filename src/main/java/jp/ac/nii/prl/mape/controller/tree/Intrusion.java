@@ -1,5 +1,7 @@
 package jp.ac.nii.prl.mape.controller.tree;
 
+import java.net.URI;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -34,7 +36,8 @@ public class Intrusion extends Thread {
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<String> entity = new HttpEntity<String>(firewall, headers);
         timer.setFirewall_ap_start(System.currentTimeMillis());
-		firewall = restTemplate.postForObject("http://localhost:8082/firewall", entity, String.class);
+        URI response = restTemplate.postForLocation("http://localhost:8082/firewall", entity);
+		firewall = restTemplate.getForObject(response, String.class);
 		timer.setFirewall_ap_stop(System.currentTimeMillis());
 		logger.debug("Received updated view");
 		
