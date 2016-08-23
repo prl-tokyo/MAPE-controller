@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 import jp.ac.nii.prl.mape.controller.configuration.ControllerConfigurationProperties;
+import jp.ac.nii.prl.mape.controller.model.TimeData;
 
 public class CloudTree {
 	
@@ -44,11 +45,13 @@ public class CloudTree {
 		return singleton;
 	}
 	
-	public boolean analyse() {
+	public boolean analyse(TimeData time) {
 		System.out.println("TEST TREE");
 		//context.refresh();
 		Intrusion intrusion = (Intrusion) context.getBean("intrusion");
 		AutoscalingFault asFault = (AutoscalingFault) context.getBean("autoscalingFault");
+		intrusion.setTimer(time);
+		asFault.setTimer(time);
 		intrusion.start();
 		asFault.start();
 		try {

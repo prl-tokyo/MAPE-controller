@@ -21,6 +21,7 @@ import jp.ac.nii.prl.mape.controller.configuration.ControllerConfigurationProper
 import jp.ac.nii.prl.mape.controller.model.APConcern;
 import jp.ac.nii.prl.mape.controller.model.MAPE;
 import jp.ac.nii.prl.mape.controller.model.MAPEKComponent;
+import jp.ac.nii.prl.mape.controller.model.TimeData;
 import jp.ac.nii.prl.mape.controller.model.Timing;
 import jp.ac.nii.prl.mape.controller.service.MAPEService;
 import jp.ac.nii.prl.mape.controller.service.TimingService;
@@ -52,10 +53,44 @@ public class MapeControllerController {
 		mapeService.loop(mape);
 	}
 	
-	@Scheduled(fixedRate=50000)
-	public void testTree() {
+//	@Scheduled(fixedRate=50000)
+//	public void testTree() {
+//		CloudTree tree = CloudTree.getInstance();
+//		tree.analyse();
+//	}
+	
+	@RequestMapping(value="/icse", method=RequestMethod.GET)
+	public TimeData icse() {
+		TimeData time = new TimeData();
+		RestTemplate restTemplate = new RestTemplate();
+		time.setMape_start(System.currentTimeMillis());
+		
+		// get data from monitor
+		time.setMonitoring_start(System.currentTimeMillis());
+		String source = restTemplate.getForObject("http://localhost:8080/monitor", String.class);
+		time.setMonitoring_stop(System.currentTimeMillis());
+		
+		// update KB
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        HttpEntity<String> entity = new HttpEntity<String>(source, headers);
+		time.setUpdate_start(System.currentTimeMillis());
+		restTemplate.postForEntity("http://localhost:8083/kb/source", entity, Object.class);
+		time.setUpdate_stop(System.currentTimeMillis());
+		
+		// analyse and plan
 		CloudTree tree = CloudTree.getInstance();
-		tree.analyse();
+		tree.analyse(time);
+		
+		// get execution
+		time.setExecution_get_start(System.currentTimeMillis());
+		String execute = restTemplate.getForObject("http://localhost:8083/kb/get/execution", String.class);
+		time.setExecution_get_stop(System.currentTimeMillis());
+		
+		//finish
+		time.setMape_stop(System.currentTimeMillis());
+		System.out.println(execute);
+		return time;
 	}
 	
 	@RequestMapping(value="/mape", method=RequestMethod.GET)
