@@ -24,6 +24,7 @@ import jp.ac.nii.prl.mape.controller.model.MAPEKComponent;
 import jp.ac.nii.prl.mape.controller.model.Timing;
 import jp.ac.nii.prl.mape.controller.service.MAPEService;
 import jp.ac.nii.prl.mape.controller.service.TimingService;
+import jp.ac.nii.prl.mape.controller.tree.CloudTree;
 
 @RestController
 @Component
@@ -44,11 +45,17 @@ public class MapeControllerController {
 		this.mapeService = mapeService;
 	}
 	
-	@Scheduled(fixedRate=900000) // every 15 minutes
+//	@Scheduled(fixedRate=900000) // every 15 minutes
 	public void mape() {
 		System.out.println("MAPE");
 		MAPE mape = createMAPELoop();
 		mapeService.loop(mape);
+	}
+	
+	@Scheduled(fixedRate=50000)
+	public void testTree() {
+		CloudTree tree = CloudTree.getInstance();
+		tree.analyse();
 	}
 	
 	@RequestMapping(value="/mape", method=RequestMethod.GET)

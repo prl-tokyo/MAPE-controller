@@ -3,10 +3,12 @@ package jp.ac.nii.prl.mape.controller.configuration;
 import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties("app.controller")
+@ComponentScan(basePackages="jp.ac.nii.prl.mape.controller.tree")
 public class ControllerConfigurationProperties {
 
 	private ComponentProperty monitor;
