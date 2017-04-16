@@ -32,7 +32,7 @@ import jp.ac.nii.prl.mape.controller.tree.CloudTree;
 @RequestMapping("/mape")
 public class MapeControllerController {
 	
-	private ControllerConfigurationProperties properties;
+	private final ControllerConfigurationProperties properties;
 	
 	private final MAPEService mapeService;
 	private final TimingService timingService;
